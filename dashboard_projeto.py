@@ -10,6 +10,7 @@ df = pd.read_csv("lello.csv")
 
 fig = px.bar(df, x="RESÍDUO PREDOMINANTE", y="QUANTIDADE (toneladas)", color="NOME CONDOMÍNIO", barmode="group")
 fig2 = px.bar(df, x="NOME CONDOMÍNIO", y="RSU RECICLAVEL (kg)", color="NOME CONDOMÍNIO", barmode="group")
+fig3 = px.scatter(df,x="RSU TOTAL (kg)", y="ORGÂNICO", trendline_scope="trace")
 
 opcoes = list(df['RESÍDUO PREDOMINANTE'].unique())
 opcoes.append("Todos os Resíduos")
@@ -18,6 +19,9 @@ opcoes2 = list(df['NOME CONDOMÍNIO'].unique())
 opcoes2.append("Todos os Condomínios")
 
 app.layout = html.Div(children=[
+
+    html.H1(children='Bem-Vindo ao nosso Dashboard !'),
+    html.H1(children='Abaixo podem ser vistas as diversas análises feitas pelo Grupo:'),
     html.H1(children='Descarte nos Condomínios'),
     html.H2(children='Gráfico com a quantidade em toneladas de lixo, organizado por resíduo e separado por condomínio'),
     dcc.Dropdown(opcoes, value='Todos os Resíduos', id='lista_residuos'),
@@ -28,13 +32,22 @@ app.layout = html.Div(children=[
     ),
 
     html.H1(children='Condomínios que mais reciclam'),
-    html.H2(children='Gráfico que mostra os condomínios que mais geram RSU reciclável'),
+    html.H2(children='Gráfico que mostra a taxa de RSU Reciclável gerada pelos condomínios'),
     dcc.Dropdown(opcoes2, value='Todos os Condomínios', id='lista_condominios'),
 
     dcc.Graph(
         id='grafico_condominios',
         figure=fig2
     ),
+
+    html.H1(children='Gráfico de Dispersão'),
+    html.H2(children='Gráfico que mostra a dispersão das medidas de descarte orgânico quando comparadas ao rsu total'),
+
+    dcc.Graph(
+        id='grafico_dispersao',
+        figure=fig3
+    ),
+
 ])
 
 
