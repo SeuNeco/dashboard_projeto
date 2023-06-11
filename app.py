@@ -24,14 +24,14 @@ scatter = px.scatter(df, x="RSU TOTAL (kg)", y="ORGÂNICO", trendline_scope="tra
 app = Dash(__name__)
 
 app.layout = html.Div(children=[
-    html.H1(children='Statistics', style={'color': '#000000', 'font-family': 'Arial', 'font-size': '36px', 'text-align': 'center', 'margin-bottom': '50px'}),
-    html.Div([dcc.Dropdown(hist_columns, value='UN', id='hist_columns', style={'font-family': 'Arial', 'font-size': '14px'}),
+    html.H1('Statistics', style={'color': '#000000', 'font-family': 'Arial', 'font-size': '36px', 'text-align': 'center', 'margin-bottom': '50px'}),
+    html.Div([html.H2('Distribuições das Variáveis', style={'color': '#000000', 'font-family': 'Arial'}), dcc.Dropdown(hist_columns, value='UN', id='hist_columns', clearable=False, style={'font-family': 'Arial', 'font-size': '14px'}),
               dcc.Graph(id='histograms', figure=hist)], style={'background-color': '#FFFFFF', 'padding': '20px', 'margin-bottom': '20px', 'border-radius': '10px', 'box-shadow': '0px 0px 20px rgba(0, 0, 0, 0.1)'}),
-    html.Div(dcc.Graph(id='pie', figure=pie), style={'background-color': '#FFFFFF', 'padding': '20px', 'margin-bottom': '20px', 'border-radius': '10px', 'box-shadow': '0px 0px 20px rgba(0, 0, 0, 0.1)'}),
-    html.Div(dcc.Graph(id='top5', figure=top5), style={'background-color': '#FFFFFF', 'padding': '20px', 'margin-bottom': '20px', 'border-radius': '10px', 'box-shadow': '0px 0px 20px rgba(0, 0, 0, 0.1)'}),
-    html.Div([dcc.Dropdown(types, value='Todos os Resíduos', id='types_list', style={'font-family': 'Arial', 'font-size': '14px'}),
+    html.Div([html.H2('Distribuições dos Resíduos', style={'color': '#000000', 'font-family': 'Arial'}), dcc.Graph(id='pie', figure=pie)], style={'background-color': '#FFFFFF', 'padding': '20px', 'margin-bottom': '20px', 'border-radius': '10px', 'box-shadow': '0px 0px 20px rgba(0, 0, 0, 0.1)'}),
+    html.Div([html.H2('Condomínios que mais Reciclam', style={'color': '#000000', 'font-family': 'Arial'}), dcc.Graph(id='top5', figure=top5)], style={'background-color': '#FFFFFF', 'padding': '20px', 'margin-bottom': '20px', 'border-radius': '10px', 'box-shadow': '0px 0px 20px rgba(0, 0, 0, 0.1)'}),
+    html.Div([html.H2('Distribuições dos Resíduos', style={'color': '#000000', 'font-family': 'Arial'}), dcc.Dropdown(types, value='Todos os Resíduos', id='types_list', clearable=False, style={'font-family': 'Arial', 'font-size': '14px'}),
               dcc.Graph(id='bar', figure=bar)], style={'background-color': '#FFFFFF', 'padding': '20px', 'margin-bottom': '20px', 'border-radius': '10px', 'box-shadow': '0px 0px 20px rgba(0, 0, 0, 0.1)'}),
-    html.Div([dcc.Dropdown(['ORGÂNICO', 'RSU RECICLAVEL (kg)'], value='ORGÂNICO', id='total_relations', style={'font-family': 'Arial', 'font-size': '14px'}),
+    html.Div([html.H2('Relacionamento das coletas', style={'color': '#000000', 'font-family': 'Arial'}), dcc.Dropdown(['ORGÂNICO', 'RSU RECICLAVEL (kg)'], value='ORGÂNICO', id='total_relations', style={'font-family': 'Arial', 'font-size': '14px'}),
               dcc.Graph(id='scatter', figure=scatter)], style={'background-color': '#FFFFFF', 'padding': '20px', 'margin-bottom': '20px', 'border-radius': '10px', 'box-shadow': '0px 0px 20px rgba(0, 0, 0, 0.1)'}),
 ], style={'background-color': '#FFFFFF', 'padding': '50px'})
 
