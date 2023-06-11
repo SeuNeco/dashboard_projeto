@@ -28,6 +28,11 @@ fig11 = px.histogram(df, x="TEMPO DE COLETA (minutos)", barmode="relative")
 res_pred_counts = df['RESÍDUO PREDOMINANTE'].value_counts()
 fig12 = px.pie(df, names=res_pred_counts.index, values=res_pred_counts.values)
 
+# graficos de densidade
+fig13 = px.density_contour(df, x="RSU TOTAL (kg)", trendline_scope="trace")
+fig14 = px.density_contour(df, x="RSU RECICLAVEL (kg)", trendline_scope="trace")
+fig15 = px.density_contour(df, x="ORGÂNICO", trendline_scope="trace")
+
 # opções para seleção de filtro dos gráficos onde é possível filtrar
 opcoes = list(df['RESÍDUO PREDOMINANTE'].unique())
 opcoes.append("Todos os Resíduos")
@@ -92,14 +97,17 @@ app.layout = html.Div(children=[
         id='grafico_histograma5',
         figure=fig8
     ),
+
     dcc.Graph(
         id='grafico_histograma6',
         figure=fig9
     ),
+
     dcc.Graph(
         id='grafico_histograma7',
         figure=fig10
     ),
+
     dcc.Graph(
         id='grafico_histograma8',
         figure=fig11
@@ -113,6 +121,24 @@ app.layout = html.Div(children=[
         figure=fig12
     ),
 
+    html.H1(children='Gráfico de Densidade'),
+    html.H2(children='Um pico em um gráfico de densidade significa que há uma concentração de valores da variável em '
+                     'uma determinada região.'),
+
+    dcc.Graph(
+        id='grafico_densidade',
+        figure=fig13
+    ),
+
+    dcc.Graph(
+        id='grafico_densidade2',
+        figure=fig14
+    ),
+
+    dcc.Graph(
+        id='grafico_densidade3',
+        figure=fig15
+    ),
 ])
 
 
